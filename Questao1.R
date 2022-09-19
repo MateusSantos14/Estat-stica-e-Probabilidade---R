@@ -7,7 +7,7 @@ Argila <- c(18.2, 21.2, 23.1, 18.5, 15.6, 20.8, 19.4, 15.4, 10.2, 21.2, 13.4, 16
 #Gráfico ramo de folhas
 stem(Argila)
 
-#Media meddiana
+#Media mediana
 mean(Argila)
 median(Argila)
 
@@ -16,9 +16,7 @@ Q1 <- quantile(Argila,0.25, type=2)
 Q2 <- quantile(Argila,0.50, type=2)
 Q3 <- quantile(Argila,0.75, type=2)
 
-#Amplitude Interquartil
-IQR <- Q3-Q1
-#Variância e Desvio Pardão
+#Variância e Desvio Padrão
 variancia <- var(Argila) 	# sum((unique(Argila))^2*ni)-mean(Argila)^2
 desvio_padrao <- sd(Argila)	# sqrt(var(X))
 
@@ -30,16 +28,17 @@ fi <- ni/N ; fi			                      # Relative frequencies
 Ni <- cumsum(ni); Ni	                    # Cumulative absolute frequencies
 Fi <- cumsum(fi); Fi	                    # Cumulative relative frequencies
 
-#hisograma
-histograma <- ggplot(data.frame(Argila=Argila), aes(x=Argila))+geom_histogram()+
-  geom_histogram(color = "black",fill="#7B3F00")+
+#Histograma
+#pdf("")
+histograma <- ggplot(data.frame(Argila=Argila), aes(x=Argila))+geom_histogram(fill="#cc7051",color = "black",breaks=seq(8, 30, by=2))+
   labs(title="Retração por secagem da argila",x="Porcentagem(%)", y = "Quantidade")+
-  scale_x_continuous(breaks=seq(8, 30, by=1))
+  scale_x_continuous(breaks=seq(8, 30, by=2))
 
 histograma
+#dev.off()
 
 #Grafico de caixa
-
+#pdf("")
 box_plot <- ggplot(data = data.frame(Argila), aes(x = "", y = Argila)) +
   stat_boxplot(geom = "errorbar",
                width = 0.5) +
@@ -50,3 +49,4 @@ box_plot <- ggplot(data = data.frame(Argila), aes(x = "", y = Argila)) +
   xlab("Porcentagem") +
   coord_flip()
 box_plot
+#dev.off()

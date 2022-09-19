@@ -1,3 +1,6 @@
+#pdf("")
+#dev.off()
+
 library(ggplot2)
 rm(list=ls())
 
@@ -23,6 +26,7 @@ frequencia_culmutativa__relativa_idade
 
 #Nacionalidade
 frequencia_relativa_nacionalidade <- table(nacionalidade)/length(nacionalidade)
+frequencia_relativa_nacionalidade
 frequencia_culmutativa_nacionalidade <- cumsSum(table(nacionalidade)/length(nacionalidade))
 
 #Renda
@@ -49,19 +53,18 @@ frequencia_culmutativa__relativa_experiencia
 
 #2 - Definitivo
 #Nacionalidade
-barplot(table(dados$Nacionalidade),
-        main="Nacionalidades",
-        xlab="Nacionalidade",
-        ylab="Frequencia",
-        border="red",
-        col="blue",
-        density=10
-)
+grafico_barras_nacionalides <- ggplot(dados, aes(x=Nacionalidade, fill = Nacionalidade)) +
+  geom_bar()+
+  theme_minimal()+
+  labs(title="Nacionalidades",x="Nacionalidade", y = "Quantidade")+
+  theme(legend.position="none")
+grafico_barras_nacionalides
 
 #Renda
-p <- ggplot(dados, aes(x=Renda))+geom_histogram()+
-  geom_histogram(color = "black",fill="#7B3F00")+
-  labs(title="Salarios",x="Renda", y = "Quantidade")
+p <- ggplot(dados, aes(x=Renda))+
+  geom_histogram(breaks=c(0.5,1.0,1.5,1.75,2,2.5,3.5),color="black")+
+  labs(title="Salarios",x="Renda", y = "Quantidade")+
+  scale_x_continuous(breaks=seq(0.5,3.5,by=0.5))
 p
 
 #3 - Definitivo
