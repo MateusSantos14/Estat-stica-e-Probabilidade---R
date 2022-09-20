@@ -92,7 +92,8 @@ grafico_barras_ano <- ggplot(penguins_data, aes(x=year)) +
 grafico_barras_ano
 
 
-#Analise bivariada x = Bill_length
+#Analise bivariada 
+#x = Bill_length
 bill_length_depth <- ggplot(penguins_data, aes(x=bill_length_mm, y=bill_depth_mm,color=species)) + 
   geom_point()+
   scale_color_manual(values=c("#ff6c02", "#c55eca", "#0e7175"))
@@ -127,8 +128,33 @@ flipper_length_body_mass <- ggplot(penguins_data, aes(x=flipper_length_mm, y=bod
   scale_color_manual(values=c("#ff6c02", "#c55eca", "#0e7175"))
 flipper_length_body_mass
 
-#Grafico de barra ano
-grafico_barras_ano_bill_length <- ggplot(penguins_data, aes(x=year,y=bill_length_mm,fill=bill_length_mm)) +
-  geom_bar(stat="identity")
+#Tabela indicadores
 
-grafico_barras_ano_bill_length
+media_bill_length_mm <- mean(penguins_data$bill_length_mm)
+Q1_bill_length_mm <- quantile(penguins_data$bill_length_mm,0.25, type=2)
+mediana_bill_length_mm <- median(penguins_data$bill_length_mm)
+Q3_bill_length_mm <- quantile(penguins_data$bill_length_mm,0.75, type=2)
+
+
+media_bill_depth_mm <- mean(penguins_data$bill_depth_mm)
+Q1_bill_depth_mm <- quantile(penguins_data$bill_depth_mm,0.25, type=2)
+mediana_bill_depth_mm <- median(penguins_data$bill_depth_mm)
+Q3_bill_depth_mm <- quantile(penguins_data$bill_depth_mm,0.75, type=2)
+
+media_flipper_length_mm <- mean(penguins_data$flipper_length_mm)
+Q1_flipper_length_mm <- quantile(penguins_data$flipper_length_mm,0.25, type=2)
+mediana_flipper_length_mm <- median(penguins_data$flipper_length_mm)
+Q3_flipper_length_mm <- quantile(penguins_data$flipper_length_mm,0.75, type=2)
+
+media_body_mass_g <- mean(penguins_data$body_mass_g)
+Q1_body_mass_g <- quantile(penguins_data$body_mass_g,0.25, type=2)
+mediana_body_mass_g <- median(penguins_data$body_mass_g)
+Q3_body_mass_g <- quantile(penguins_data$body_mass_g,0.75, type=2)
+
+
+indicadores <- data.frame(Indicadores=c('bill_length_mm','bill_depth_mm','flipper_length_mm',"body_mass_g"),
+                          Medias=c(media_bill_length_mm,media_bill_depth_mm,media_flipper_length_mm,media_body_mass_g),
+                          Primeiro_Quartil=c(Q1_bill_length_mm,Q1_bill_depth_mm,Q1_flipper_length_mm,Q1_body_mass_g),
+                          Medianas=c(mediana_bill_length_mm,mediana_bill_depth_mm,mediana_flipper_length_mm,mediana_body_mass_g),
+                          Terceiro_Quartil=c(Q3_bill_length_mm,Q3_bill_depth_mm,Q3_flipper_length_mm,Q3_body_mass_g))
+indicadores
